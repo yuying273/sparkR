@@ -22,6 +22,7 @@ rst = read.df("/wsc/song273/sk/test/logistics2.txt",source = "text")
 df <- read.df("/wsc/song273/sk/test/logistic.csv", "csv", header = "false", inferSchema = "true", na.strings = "NA")
 model <- glm( v127 ~ v0, data = df, family = "binomial")
 names(df) = paste("v", 0:127, sep="")
+model <- glm( v127 ~ ., data = df, family = "binomial")   
 head(df)
 #  notes: http://spark.apache.org/docs/latest/sparkr.html
 #  notes: https://spark.apache.org/docs/latest/ml-classification-regression.html
