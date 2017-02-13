@@ -16,3 +16,7 @@ value <- matrix(c(rnorm(n*p), sample(c(0,1), n, replace=TRUE)), ncol=p+1)
 rst = read.df("/wsc/song273/sk/test/logistics2.txt",source = "text")
 #  notes: http://spark.apache.org/docs/latest/sparkr.html
 #  notes: https://spark.apache.org/docs/latest/ml-classification-regression.html
+# When Spark is configured with YARN, the default file system used is HDFS. 
+# If you want to read a file from your local disk, try:
+# people <- read.df("file:/usr/lib/spark/examples/src/main/resources/people.json", "json”)
+
