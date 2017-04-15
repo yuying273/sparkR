@@ -30,3 +30,7 @@ head(df)
 # If you want to read a file from your local disk, try:
 # people <- read.df("file:/usr/lib/spark/examples/src/main/resources/people.json", "json”)
 
+library(SparkR, lib.loc ="spark/R/lib/")
+sparkEnvir <- list(spark.num.executors='5', spark.executor.cores='5')
+sparkR.session(master ="yarn-client",sparkHome="spark",sparkConfig=sparkEnvir)
+# http://spark.apache.org/docs/preview/running-on-yarn.html
