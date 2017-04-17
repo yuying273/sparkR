@@ -33,4 +33,6 @@ head(df)
 library(SparkR, lib.loc ="spark/R/lib/")
 sparkEnvir <- list(spark.num.executors='5', spark.executor.cores='5')
 sparkR.session(master ="yarn-client",sparkHome="spark",sparkConfig=sparkEnvir)
-# http://spark.apache.org/docs/preview/running-on-yarn.html
+# http://spark.apache.org/docs/preview/running-on-yarn.
+
+ spark/bin/sparkR --master yarn --deploy-mode client --num-executors 5 --executor-cores 5 --conf spark.sql.warehouse.dir=file:////home/song273/sparkwork
