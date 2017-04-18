@@ -1,4 +1,9 @@
 
+# cd /var/lib/spark
+# ./bin/pyspark --master yarn-client --num-executors 5 --executor-memory 10g --executor-cores 5
+from pyspark import SparkContext
+#logFile = "$YOUR_SPARK_HOME/README.md"  # Should be some file on your system
+#sc = SparkContext("local", "Simple App")
 from pyspark.mllib.classification import LogisticRegressionWithLBFGS
 from pyspark.mllib.regression import LabeledPoint
 from numpy import array
