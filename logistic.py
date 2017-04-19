@@ -32,7 +32,7 @@ import numpy as np
 
 conf = SparkConf().setMaster("yarn-client").setAppName("logistic").set("spark.executor.memory","1g")
 sc = SparkContext(conf=conf)
-
+--master yarn-client --num-executors 5 --executor-cores 5
 
 
 def generate(line):
