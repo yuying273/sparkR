@@ -69,3 +69,10 @@ data = sc.parallelize(range(0,100), 2)
 
 genDataFrame = data.map(generate)
 
+
+### logistic regression
+data = sc.textFile("/wsc/song273/spark/data/n29v4m3")
+data.count()
+data.take(5)
+mod = LogisticRegressionWithLBFGS.train(data.take(200))
+
