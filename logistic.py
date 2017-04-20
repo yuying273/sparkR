@@ -2,6 +2,8 @@
 # cd /var/lib/spark
 # ./bin/pyspark --master yarn-client --num-executors 5 --executor-memory 10g --executor-cores 5
 # ./bin/pyspark --master yarn-client --num-executors 5 --executor-cores 5
+# ./spark-submit --master yarn-client --num-executors 5 --executor-cores 5 ~/simulation.py
+
 from pyspark import SparkContext
 #logFile = "$YOUR_SPARK_HOME/README.md"  # Should be some file on your system
 #sc = SparkContext("local", "Simple App")
