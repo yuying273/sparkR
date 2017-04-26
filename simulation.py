@@ -26,6 +26,14 @@ def generate(line):
     return dataframe
 
 data = sc.parallelize(range(0,r), 100)
-
+# data.count()
+# data.collect() # only if the data can be fit into the memory
 outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(int(math.log(m,2)))
+# a1 = data.map(generate)
+# a1.count()
+# a1.collect()
 data.map(generate).saveAsTextFile(outputfile)
+
+# try key-value pair form
+data.map()
+
