@@ -66,8 +66,8 @@ def generate(line):
 
 data = sc.parallelize(range(0,100), 2)
 
-
-genDataFrame = data.map(generate)
+## key-value pair
+genDataFrame = data.map(lambda x: (x,generate(x))) 
 
 
 ### logistic regression
