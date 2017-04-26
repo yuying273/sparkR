@@ -35,5 +35,5 @@ outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(int(mat
 data.map(generate).saveAsTextFile(outputfile)
 
 # try key-value pair form
-data.map()
+data.map(lambda x: (x,generate(x))).saveAsTextFile(outputfile)
 
