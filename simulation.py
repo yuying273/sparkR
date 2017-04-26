@@ -14,9 +14,9 @@ p = 2**v-1
 m = 8
 r = 2**(n-m)
 
-def generate(line):
+def generate(line,m=m):
     p = 15
-    m = 2**8
+    m = 2**m
     np.random.seed(line)
     x = np.random.normal(0, 1, [m, p])
     np.random.seed(line)
