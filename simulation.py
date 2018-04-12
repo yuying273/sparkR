@@ -1,3 +1,8 @@
+#As soon as you start pyspark shell type:
+# which will show you all of the current config settings
+sc.getConf().getAll()
+
+
 
 from pyspark import SparkContext, SparkConf
 from pyspark.mllib.classification import LogisticRegressionWithLBFGS
@@ -5,8 +10,15 @@ from pyspark.mllib.regression import LabeledPoint
 import numpy as np
 import math
 
-conf = SparkConf().setMaster("yarn-client").setAppName("logistic").set("spark.executor.memory","1g")
+#http://spark.apache.org/docs/2.1.0/api/python/pyspark.html
+#https://spark.apache.org/docs/latest/submitting-applications.html#master-urls
+#https://techvidvan.com/tutorials/spark-modes-of-deployment/
+conf = SparkConf().setMaster("yarn-client").setAppName("logisticSimulation").setAll([("spark.executor.memory","1g")])
+#conf = SparkConf().setMaster("yarn-cluster").setAppName("logisticSimulation").setAll([("spark.executor.memory","1g")])
+## some configuration: "spark.executor.memory", "spark.executor.cores","spark.cores.max", "spark.driver.memory"
+
 sc = SparkContext(conf=conf)
+#sc.getConf().getAll()
 
 n = 29
 v = 4
