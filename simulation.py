@@ -18,7 +18,7 @@ conf = SparkConf().setMaster("yarn-client").setAppName("logisticSimulation").set
 ## some configuration: "spark.executor.memory", "spark.executor.cores","spark.cores.max", "spark.driver.memory"
 ## can we read a hadoop file, how to translate a rhipe file to hadoop file? : hadoopFile,hadoopRDD?
 
-SparkContext = SparkContext(conf=conf)
+sc = SparkContext(conf=conf)
 #sc.getConf().getAll()
 
 n = 29
@@ -45,7 +45,7 @@ def generate(line,m=m,p=p):
 #Typically you want 2-4 partitions for each CPU in your cluster. 
 #Normally, Spark tries to set the number of partitions automatically based on your cluster. 
 #However, you can also set it manually by passing it as a second parameter to parallelize (e.g. sc.parallelize(data, 10))
-data = SparkContext.parallelize(range(0,r), 100)
+data = sc.parallelize(range(0,r), 100)
 # data.count()
 # data.collect() # only if the data can be fit into the memory
 outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(int(math.log(m,2)))
@@ -56,7 +56,7 @@ data.map(generate).saveAsTextFile(outputfile)
 #saveAsSequenceFile(path, compressionCodecClass=None)
 #data.map(generate).saveAsSequenceFile(outputfile)
 #saveAsPickleFile(path, batchSize=10)
-rdd = SparkContext.parallelize([
+rdd = sc.parallelize([
     "2,Fitness", "3,Footwear", "4,Apparel"
 ])
 rdd.map(lambda x: tuple(x.split(",", 1))).saveAsSequenceFile("testSeq")
