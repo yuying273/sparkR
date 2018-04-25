@@ -31,9 +31,11 @@ def logisT(value):
 
 inputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(int(math.log(m,2)))
 rdd = sc.textFile(inputfile)
+## get the number of partitions
+rdd.getNumPartitions()
 #Every RDD has a fixed number of partitions that 
 #determine the degree of parallelism to use when executing operations on the RDD.
-coefs = rdd.mapValues(logisT).reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]))
+coefs = rdd.map(logisT).reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]),100)
 
 
 
