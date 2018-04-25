@@ -6,4 +6,10 @@
 #and then across the partitions, allowing it to scale efficiently to large datasets.
 
 ## carry out the logistic regression and return the average value for coefficient
+## reduceByKey, familiar with the combiner concept from MapReduce
+## calling reduceByKey() and foldByKey() will automatically perform combining locally
+## on each machine before computing global totals for each key. The user does not need to specify a combiner.
+The more general combineByKey() interface allows you to customize combining behavior.
 rdd.mapValues(lambda x: (x, 1)).reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]))
+
+##
