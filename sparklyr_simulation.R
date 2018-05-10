@@ -5,15 +5,18 @@
 # load the sparklyr package
 library(sparklyr)
 library(dplyr)
-config <- spark_config()                            # Create a config to tune memory
-config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
-#Sys.setenv(SPARK_HOME = "/usr/local/spark")
-#Sys.setenv(HADOOP_CONF_DIR = '/usr/local/hadoop/etc/hadoop/conf')
-#Sys.setenv(YARN_CONF_DIR = '/usr/local/hadoop/etc/hadoop/conf')
+config <- spark_config()   # Create a config to tune memory
 
-config$spark.executor.instances <- 4
+# no need to set spark_home, hadoop_conf_dir and so on, it is set on wsc cluster, you can check
+# Sys.getenv('SPARK_HOME')
+#Sys.setenv(SPARK_HOME = "/usr/lib/spark")
+#Sys.setenv(HADOOP_CONF_DIR = '/usr/lib/hadoop/etc/hadoop')
+#Sys.setenv(YARN_CONF_DIR = '/usr/lib/hadoop/etc/hadoop/conf')
+
+config$spark.executor.instances <- 4 
 config$spark.executor.cores <- 4
 config$spark.executor.memory <- "4G"
+config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
 
 file <- gsub("s3n://commoncrawl/",                  # mapping the S3 bucket url
              "http://commoncrawl.amazonaws.com/",   # into a adownloadable url
