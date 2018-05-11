@@ -21,4 +21,6 @@ with open(outfile, 'ab') as csvfile:
                 np.random.random(chunksize)*50,
                 np.random.random(chunksize)*50,
                 np.random.randint(1000, size=(chunksize,))]
-        csvfile.writelines(['%s,%.6f,%.6f,%i\n' % row for row in zip(*data)])   
+        #csvfile.writelines(['%s,%.6f,%.6f,%i\n' % row for row in zip(*data)])   
+         csvfile.writelines(['%.6f,%.6f,%i\n' % row for row in zip(*data)])   
+
