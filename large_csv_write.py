@@ -11,7 +11,7 @@ import numpy as np
 import uuid
 import csv
 import os
-outfile = 'data-alt.csv'
+outfile = '/hadoop/mnt/wsc/song273/try.csv'
 outsize = 10 # MB
 chunksize = 1000
 with open(outfile, 'a') as csvfile:
