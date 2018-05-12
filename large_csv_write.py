@@ -25,9 +25,12 @@ def generate(line,m=m,p=p):
     #y = np.random.choice([0, 1], [m, 1])
     y = np.random.binomial(1,0.5,[m,1]) 
     dataframe = np.hstack((x, y,np.full((m,1),line)))
-    return np.ndarray.tolist(dataframe) 
+    #return np.ndarray.tolist(dataframe) 
+    return dataframe
 
-with open(outfile, 'a') as csvfile:
+with open(outfile, 'w') as csvfile:
+        # creating a csv writer object
+        csvwriter = csv.writer(csvfile)
         for i in range(r):
                 #data = [
                 #[uuid.uuid4() for i in range(chunksize)],
@@ -36,5 +39,7 @@ with open(outfile, 'a') as csvfile:
                 #        np.random.randint(1000, size=(chunksize,))]
                 #csvfile.writelines(['%s,%.6f,%.6f,%i\n' % row for row in zip(*data)])
                 data = generate(i,m,p)
-                csvfile.writelines(['%.6f,'*p+'%i,%i\n' % row for row in zip(*data)])   
+                # writing the data rows
+                csvwriter.writerows(rows)
+                #csvfile.writelines(['%.6f,'*p+'%i,%i\n' % row for row in zip(*data)])   
 
