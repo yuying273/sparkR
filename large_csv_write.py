@@ -23,7 +23,7 @@ def generate(line,m=m,p=p):
     x = np.random.normal(0, 1, [m, p])
     np.random.seed(line)
     #y = np.random.choice([0, 1], [m, 1])
-    y = np.random.binomial(2,0.5,[m,1]) 
+    y = np.random.binomial(1,0.5,[m,1]) 
     dataframe = np.hstack((x, y,line))
     return np.ndarray.tolist(dataframe) 
 
