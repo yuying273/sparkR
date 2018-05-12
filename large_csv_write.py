@@ -36,5 +36,5 @@ with open(outfile, 'a') as csvfile:
                 #        np.random.randint(1000, size=(chunksize,))]
                 #csvfile.writelines(['%s,%.6f,%.6f,%i\n' % row for row in zip(*data)])
                 data = generate(i,m,p)
-                csvfile.writelines(['%.6f,'*p+'%i\n'*2 % row for row in zip(*data)])   
+                csvfile.writelines(['%.6f,'*p+'%i,%i\n' % row for row in zip(*data)])   
 
