@@ -24,7 +24,7 @@ def generate(line,m=m,p=p):
     np.random.seed(line)
     #y = np.random.choice([0, 1], [m, 1])
     y = np.random.binomial(1,0.5,[m,1]) 
-    dataframe = np.hstack((x, y,line))
+    dataframe = np.hstack((x, y,np.full((m,1),line)))
     return np.ndarray.tolist(dataframe) 
 
 with open(outfile, 'a') as csvfile:
