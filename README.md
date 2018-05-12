@@ -1,1 +1,1 @@
-# sparkR
+# spark and R
