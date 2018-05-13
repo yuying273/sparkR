@@ -13,15 +13,11 @@ config <- spark_config()   # Create a config to tune memory
 #Sys.setenv(HADOOP_CONF_DIR = '/usr/lib/hadoop/etc/hadoop')
 #Sys.setenv(YARN_CONF_DIR = '/usr/lib/hadoop/etc/hadoop/conf')
 
-config$spark.executor.instances <- 4 
-config$spark.executor.cores <- 4
-config$spark.executor.memory <- "4G"
-config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
-
-file <- gsub("s3n://commoncrawl/",                  # mapping the S3 bucket url
-             "http://commoncrawl.amazonaws.com/",   # into a adownloadable url
-             sparkwarc::cc_warc(1)), "warc.gz")     # from the first archive file
-
+config$spark.executor.instances <- 10 
+config$spark.executor.cores <- 20
+#config$spark.executor.memory <- "4G"
+#config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
 # create the Spark context
 sc <- spark_connect(master = "yarn-client", version = "2.2.0",config=config) # using custom configs
+
 
