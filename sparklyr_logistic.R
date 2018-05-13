@@ -21,3 +21,4 @@ config$spark.executor.cores <- 20
 sc <- spark_connect(master = "yarn-client", version = "2.2.0",config=config) # using custom configs
 
 
+
