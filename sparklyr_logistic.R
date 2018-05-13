@@ -20,5 +20,7 @@ config$spark.executor.cores <- 5
 # create the Spark context
 sc <- spark_connect(master = "yarn-client", version = "2.2.0",config=config) # using custom configs
 
+#### read the data in
+spark_read_csv(sc, data, "/wsc/song273/pf10n/sparklyr/data/n30v4m14.csv", header = TRUE)
 
 
