@@ -33,7 +33,7 @@ data_tbl %>% group_by(g)
 spark_apply(
   data_tbl,
   function(e) broom::tidy(glm.fit(y~v1+v2+v3+v4+v5+v6+v7,e)),
-  names = c("term", "estimate", "std.error", "statistic", "p.value"),
+  #names = c("term", "estimate", "std.error", "statistic", "p.value"),
   group_by = "g"
 )
 
