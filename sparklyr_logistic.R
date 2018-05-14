@@ -21,7 +21,7 @@ config$spark.executor.cores <- 5
 sc <- spark_connect(master = "yarn-client", version = "2.2.0",config=config) # using custom configs
 
 #### read the data in
-data_tbl = spark_read_csv(sc, data, "/wsc/song273/pf10n/sparklyr/data/n20v4m10.csv", header = TRUE)
+data_tbl = spark_read_csv(sc, "data", "/wsc/song273/pf10n/sparklyr/data/n20v4m10.csv", header = TRUE)
 # returns a reference to a Spark DataFrame which can be used as a dplyr table (tbl)
 ## more details about function spark_read_csv :https://github.com/rstudio/sparklyr/issues/315
 ## spark_read_csv: with spark_csv_read, data is not loaded into R bur rather into the Java VM. 
