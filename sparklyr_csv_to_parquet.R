@@ -42,11 +42,10 @@ data_tbl
 data_tbl %>%
   group_by(g)
 
-# 9  0.376 -1.10   0.298  1.33  -0.695  -0.150 -0.435   1.85   0.672  0.407 
-#10  0.676  0.577 -0.208  0.396 -1.09   -1.49   0.439   0.167  0.635  2.38  
-# ... with more rows, and 7 more variables: v10 <dbl>, v11 <dbl>, v12 <dbl>,
-#   v13 <dbl>, v14 <dbl>, y <dbl>, g <dbl>
+spark_write_parquet(data_tbl,"/wsc/song273/pf10n/sparklyr/parquet/n20v4m10")
 
+
+#data_tbl = spark_read_parquet(sc,"groupdata2","/wsc/song273/pf10n/sparklyr/parquet/n20v4m10")
 
 
 
