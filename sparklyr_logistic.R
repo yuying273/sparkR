@@ -22,8 +22,8 @@ config <- spark_config()   # Create a config to tune memory
 #config$spark.executor.instances <- 2
 ## WSC cluster has 10 node, each node has 20 cores
 config[["spark.r.command"]] <-"/apps/wsc/R/3.4.3_gcc-4.8.5_wsc/bin/Rscript"
-config$spark.executor.instances <- 9
-config$spark.executor.cores <- 20
+config$spark.executor.instances <- 199
+#config$spark.executor.cores <- 20
 config$spark.shuffle.service.enabled = TRUE
 config$spark.dynamicAllocation.enabled = TRUE
 #config$spark.executor.memory <- "4G"
@@ -39,11 +39,12 @@ data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
 
 coeffs = spark_apply(
   data_tbl,
-  function(e){glm.fit(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,e,family=binomial())$coef}
+  function(e){glm(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,e,family=binomial())$coef}
   #function(e) broom::tidy(glm.fit(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,e,family=binomial())$coef),
   #names = c("term", "estimate", "std.error", "statistic", "p.value"),
   group_by = "g"
-)
+)%>% 
+    summarize_all(mean)
 
 coeffs <- data_tbl %>% 
     spark_apply(
