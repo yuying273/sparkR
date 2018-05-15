@@ -23,6 +23,7 @@ config <- spark_config()   # Create a config to tune memory
 ## WSC cluster has 10 node, each node has 20 cores
 config[["spark.r.command"]] <-"/apps/wsc/R/3.4.3_gcc-4.8.5_wsc/bin/R"
 config$spark.executor.cores <- 20
+config$spark.shuffle.service.enabled = TRUE
 config$spark.dynamicAllocation.enabled = TRUE
 #config$spark.executor.memory <- "4G"
 #config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
