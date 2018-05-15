@@ -29,7 +29,7 @@ config$spark.dynamicAllocation.enabled = TRUE
 #config$spark.executor.memory <- "4G"
 #config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
 # create the Spark context
-sc <- spark_connect(master = "yarn-client", version = "2.2.0",config=config) # using custom configs
+sc <- spark_connect(master = "yarn", version = "2.2.0",config=config) # using custom configs
 data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
 #result <- data_tbl %>% 
            #mutate(binary_y = as.numeric(activ == "Active")) %>%
