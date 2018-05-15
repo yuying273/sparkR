@@ -48,7 +48,7 @@ coeffs = spark_apply(
 
 coeffs <- data_tbl %>% 
     spark_apply(
-               function(e){head(e,1)},
+               function(e){head(e,1)[,c(1:5,16)]},
                #names = c("term", "estimate", "std.error", "statistic", "p.value"),
                group_by = "g") %>% 
     summarize_all(mean)
