@@ -44,6 +44,13 @@ coeffs = spark_apply(
   group_by = "g"
 )
 
+coeffs = spark_apply(
+  data_tbl,
+  function(e) head(e,2),
+  #names = c("term", "estimate", "std.error", "statistic", "p.value"),
+  group_by = "g"
+)
+
 coeffs
 
 
