@@ -39,9 +39,9 @@ data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
 
 coeffs = spark_apply(
   data_tbl,
-  function(e){glm(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,family=binomial(),data=e)$coef},
+  function(e){matrix(glm(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,family=binomial(),data=e)$coef,nrow=1)},
   #function(e) broom::tidy(glm.fit(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,e,family=binomial())$coef),
-  names = c(paste("v",0:14,sep="")),
+  #names = c(paste("v",0:14,sep="")),
   group_by = "g"
 )%>% 
     summarize_all(mean)
