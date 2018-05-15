@@ -31,7 +31,7 @@ data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
 #result <- data_tbl %>% 
            #mutate(binary_y = as.numeric(activ == "Active")) %>%
            group_by(g)%>% 
-           ml_logistic_regression(y~v1+v2+v3+v4+v5+v6+v7,fit_intercept =FALSE,family = "binomial")
+           ml_logistic_regression(y~v1+v2+v3+v4+v5+v6+v7,fit_intercept =FALSE,family = "binomial")$Coefficients
 coeffs = spark_apply(
   data_tbl,
   function(e) broom::tidy(glm.fit(y~v1+v2+v3+v4+v5+v6+v7,e,)$coef),
