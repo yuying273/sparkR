@@ -28,8 +28,10 @@ config$spark.dynamicAllocation.enabled = TRUE
 # create the Spark context
 sc <- spark_connect(master = "yarn-client", version = "2.2.0",config=config) # using custom configs
 data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
-#data_tbl %>% group_by(g)
-#         %>% summarize(coff = ml_logistic_regression(y~v1+v2+v3+v4+v5+v6+v7,fit_intercept =FALSE,family = "binomial")$coefficients)
+#result <- data_tbl %>% 
+           #mutate(binary_y = as.numeric(activ == "Active")) %>%
+           group_by(g)%>% 
+           ml_logistic_regression(y~v1+v2+v3+v4+v5+v6+v7,fit_intercept =FALSE,family = "binomial")
 coeffs = spark_apply(
   data_tbl,
   function(e) broom::tidy(glm.fit(y~v1+v2+v3+v4+v5+v6+v7,e,)$coef),
