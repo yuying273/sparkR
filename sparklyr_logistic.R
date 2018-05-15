@@ -30,12 +30,13 @@ config$spark.dynamicAllocation.enabled = TRUE
 #config[["sparklyr.shell.driver-memory"]] <- "10G"   # Set driver memory to 10GB
 # create the Spark context
 sc <- spark_connect(master = "yarn", version = "2.2.0",config=config) # using custom configs
+start_time <- Sys.time()
 data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
 #result <- data_tbl %>% 
            #mutate(binary_y = as.numeric(activ == "Active")) %>%
-           group_by(g)%>% 
-           ml_logistic_regression(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,fit_intercept =FALSE,family = "binomial")$Coefficients
-start_time <- Sys.time()
+#           group_by(g)%>% 
+#           ml_logistic_regression(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,fit_intercept =FALSE,family = "binomial")$Coefficients
+
 coeffs = spark_apply(
   data_tbl,
   function(e) broom::tidy(glm.fit(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,e,family=binomial())$coef),
