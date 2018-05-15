@@ -21,7 +21,7 @@ config <- spark_config()   # Create a config to tune memory
 
 #config$spark.executor.instances <- 2
 ## WSC cluster has 10 node, each node has 20 cores
-config[["spark.r.command"]] <-"/apps/wsc/R/3.4.3_gcc-4.8.5_wsc/bin/R"
+config[["spark.r.command"]] <-"/apps/wsc/R/3.4.3_gcc-4.8.5_wsc/bin/Rscript"
 config$spark.executor.instances <- 9
 config$spark.executor.cores <- 20
 config$spark.shuffle.service.enabled = TRUE
