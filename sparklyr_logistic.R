@@ -7,7 +7,8 @@ sleep = 60
 n=20
 v=4
 m=10
-datapath = paste("/wsc/song273/pf10n/sparklyr/parquet/","n",n,"v",v,"m",m,sep="")
+data_input = paste("/wsc/song273/pf10n/sparklyr/parquet/","n",n,"v",v,"m",m,sep="")
+data_output = paste("/wsc/song273/pf10n/sparklyr/coef/","n",n,"v",v,"m",m,sep="")
 ################################# start time ##################################
 start_time <- Sys.time()
 
@@ -39,12 +40,13 @@ data_tbl = spark_read_parquet(sc,"data_tbl",datapath)
 
 coeffs = spark_apply(
   data_tbl,
-  function(e){matrix(glm(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,family=binomial(),data=e)$coef,nrow=1)},
+  function(e){matrix(glm(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14-1,family=binomial(),data=e)$coef,nrow=1)},
   #function(e) broom::tidy(glm.fit(y~v0+v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+v12+v13+v14,e,family=binomial())$coef),
   #names = c(paste("v",0:14,sep="")),
   group_by = "g"
 )%>% 
     summarize_all(mean)
+
 
 coeffs <- data_tbl %>% 
     spark_apply(
@@ -52,7 +54,7 @@ coeffs <- data_tbl %>%
                #names = c("term", "estimate", "std.error", "statistic", "p.value"),
                group_by = "g") %>% 
     summarize_all(mean)
-
+spark_write_parquet(coeffs,data_output)
 
 
 #################################### end time ################################
@@ -61,7 +63,6 @@ t = as.numeric(end_time) - as.numeric(start_time)
 print(start_time)
 print(end_time)
 print(t)
-
 ## put the whole system on sleep
 spark_disconnect(sc)
 Sys.sleep(sleep)
