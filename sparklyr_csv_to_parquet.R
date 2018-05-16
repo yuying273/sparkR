@@ -46,6 +46,10 @@ spark_write_parquet(data_tbl,"/wsc/song273/pf10n/sparklyr/parquet/n20v4m10")
 
 
 #data_tbl = spark_read_parquet(sc,"groupdata2","/wsc/song273/pf10n/sparklyr/parquet/n20v4m10")
-
-
-
+path = "/hadoop/mnt/wsc/song273/pf10n/sparklyr/"
+for(m in c(9,11,14,15)){
+  inputpath = paste(path,"data/n30v4m",m,".csv",sep="")
+  data_tbl = spark_read_csv(sc, "data", inputpath, header = TRUE)
+  outputpath = paste(path,"parquet/n30v4m",m,seq="")
+  spark_write_parquet(data_tbl,outputpath)
+}
