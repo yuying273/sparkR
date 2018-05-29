@@ -1,3 +1,6 @@
+# cd /var/lib/spark
+# ./bin/pyspark --master yarn-client --num-executors 5 --executor-memory 10g --executor-cores 5
+# ./bin/pyspark --master yarn-client --num-executors 5 --executor-cores 5
 
 from pyspark import SparkContext, SparkConf
 from pyspark.mllib.classification import LogisticRegressionWithLBFGS
@@ -41,11 +44,44 @@ outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(m)+"ver
 # a1.count()
 # a1.collect()
 data.map(generate).saveAsTextFile(outputfile)
+#[Stage 0:======>                                                 (11 + 2) / 100]
+#[Stage 0:=================================>                      (59 + 2) / 100]
+#[Stage 0:==================================>                     (61 + 2) / 100]
+#[Stage 0:=================================================>      (88 + 2) / 100]
+## Explanation about the stage: There are total 100 tasks to be completed. 
+## 2 cores are being used to complete the 1000 tasks. 
+## check spark.cores.max or executor.cores or dynamic in the spark configuration. 
+
 end_time = time.time()
 print(end_time - start)
+##########################################################################################
+## save to sequence file
 #saveAsSequenceFile(path, compressionCodecClass=None)
 #data.map(generate).saveAsSequenceFile(outputfile)
 #saveAsPickleFile(path, batchSize=10)
+
+start = time.time()
+#data = sc.parallelize(range(0,r), 100)
+data = sc.parallelize(range(0,r)) ## take 16 minutes to create data ## 
+# data.count()
+# data.collect() # only if the data can be fit into the memory
+outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)
+# a1 = data.map(generate)
+# a1.count()
+# a1.collect()
+data.map(generate).saveAsSequenceFile(outputfile1)
+#[Stage 0:======>                                                 (11 + 2) / 100]
+#[Stage 0:=================================>                      (59 + 2) / 100]
+#[Stage 0:==================================>                     (61 + 2) / 100]
+#[Stage 0:=================================================>      (88 + 2) / 100]
+## Explanation about the stage: There are total 100 tasks to be completed. 
+## 2 cores are being used to complete the 1000 tasks. 
+## check spark.cores.max or executor.cores or dynamic in the spark configuration. 
+
+end_time = time.time()
+print(end_time - start)
+
+
 rdd = sc.parallelize([
     "2,Fitness", "3,Footwear", "4,Apparel"
 ])
