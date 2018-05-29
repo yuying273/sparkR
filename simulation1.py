@@ -69,7 +69,7 @@ outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + s
 # a1 = data.map(generate)
 # a1.count()
 # a1.collect()
-data.map(generate).saveAsSequenceFile(outputfile1)
+data.map(lambda x: (x,generate(x))).saveAsSequenceFile(outputfile1)
 #[Stage 0:======>                                                 (11 + 2) / 100]
 #[Stage 0:=================================>                      (59 + 2) / 100]
 #[Stage 0:==================================>                     (61 + 2) / 100]
