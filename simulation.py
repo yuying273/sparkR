@@ -9,6 +9,7 @@ from pyspark.mllib.classification import LogisticRegressionWithLBFGS
 from pyspark.mllib.regression import LabeledPoint
 import numpy as np
 import math
+import time
 
 #http://spark.apache.org/docs/2.1.0/api/python/pyspark.html
 #https://spark.apache.org/docs/latest/submitting-applications.html#master-urls
@@ -45,10 +46,12 @@ def generate(line,m=m,p=p):
 #Typically you want 2-4 partitions for each CPU in your cluster. 
 #Normally, Spark tries to set the number of partitions automatically based on your cluster. 
 #However, you can also set it manually by passing it as a second parameter to parallelize (e.g. sc.parallelize(data, 10))
-data = sc.parallelize(range(0,r), 100)
+start = time.time()
+#data = sc.parallelize(range(0,r), 100)
+data = sc.parallelize(range(0,r))
 # data.count()
 # data.collect() # only if the data can be fit into the memory
-outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(int(math.log(m,2)))
+outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(m)
 # a1 = data.map(generate)
 # a1.count()
 # a1.collect()
