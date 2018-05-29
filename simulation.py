@@ -49,9 +49,11 @@ def generate(line,m=m,p=p):
 start = time.time()
 #data = sc.parallelize(range(0,r), 100)
 data = sc.parallelize(range(0,r))
+## take 
 # data.count()
 # data.collect() # only if the data can be fit into the memory
 outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(m)
+outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)
 # a1 = data.map(generate)
 # a1.count()
 # a1.collect()
