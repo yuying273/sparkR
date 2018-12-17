@@ -28,7 +28,7 @@ p = 2**v-1
 m = 8
 r = 2**(n-m)
 
-def generate(line,m=m,p=p):
+def generate(line,m,p):
     p = p
     m = 2**m
     np.random.seed(line)
@@ -37,7 +37,7 @@ def generate(line,m=m,p=p):
     #y = np.random.choice([0, 1], [m, 1])
     y = np.random.binomial(2,0.5,[m,1])
     dataframe = np.hstack((x, y))
-    return dataframe
+    return(dataframe)
 
 ## 
 #One important parameter for parallel collections is
