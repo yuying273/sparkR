@@ -26,6 +26,9 @@ def generate(line,m=m,p=p):
     dataframe = np.hstack((x, y))
     return dataframe
 
+
+
+
 def generate(line,m,p):
     p = p
     m = 2**m
@@ -36,6 +39,13 @@ def generate(line,m,p):
     y = np.random.binomial(2,0.5,[m,1])
     dataframe = np.hstack((x, y))
     return(list(dataframe))
+
+value = generate(1,m,p)
+outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)
+# a1 = data.map(generate)
+# a1.count()
+# a1.collect()
+data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
 ## 
 #One important parameter for parallel collections is
 #the number of partitions to cut the dataset into. 
