@@ -26,6 +26,16 @@ def generate(line,m=m,p=p):
     dataframe = np.hstack((x, y))
     return dataframe
 
+def generate(line,m,p):
+    p = p
+    m = 2**m
+    np.random.seed(line)
+    x = np.random.normal(0, 1, [m, p])
+    np.random.seed(line)
+    #y = np.random.choice([0, 1], [m, 1])
+    y = np.random.binomial(2,0.5,[m,1])
+    dataframe = np.hstack((x, y))
+    return(list(dataframe))
 ## 
 #One important parameter for parallel collections is
 #the number of partitions to cut the dataset into. 
