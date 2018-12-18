@@ -37,8 +37,9 @@ def generate(line,m,p):
     np.random.seed(line)
     #y = np.random.choice([0, 1], [m, 1])
     y = np.random.binomial(2,0.5,[m,1])
-    dataframe = list(np.hstack((x, y)).astype(float))
+    dataframe = list(np.hstack((x, y)))
     dataframe = [list(element) for element in dataframe]
+    dataframe = [[float(ele) for ele in element] for element in dataframe]
     return(dataframe)
 
 value = generate(1,m,p)
