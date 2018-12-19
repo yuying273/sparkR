@@ -44,5 +44,10 @@ data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
 map{case (x, y): (x, func(y))}             
 map(lambda (x,y): (1, y)).mapValues(lambda x: (x, 1)).reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]))
 .map(lambda key, xy: (key, xy[0]/xy[1])).collectAsMap()
-                                                                                                                 
+ 
+sumCount = nums.combineByKey((lambda x: (x,1)),
+                             (lambda x, y: (x[0] + y, x[1] + 1)),
+                             (lambda x, y: (x[0] + y[0], x[1] + y[1])))
+r = sumCount.map(lambda key, xy: (key, xy[0]/xy[1])).collectAsMap()
+print(*r)    
                                                                                                                  
