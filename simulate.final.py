@@ -41,6 +41,7 @@ data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
 #Typically you want 2-4 partitions for each CPU in your cluster. 
 #Normally, Spark tries to set the number of partitions automatically based on your cluster. 
 #However, you can also set it manually by passing it as a second parameter to parallelize (e.g. sc.parallelize(data, 10))                                                                      
-map{case (x, y): (x, func(y))}                                                                                                                 
+map{case (x, y): (x, func(y))}             
+map(lambda (x,y): (1, y))
                                                                                                                  
                                                                                                                  
