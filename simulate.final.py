@@ -42,6 +42,7 @@ data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
 #Normally, Spark tries to set the number of partitions automatically based on your cluster. 
 #However, you can also set it manually by passing it as a second parameter to parallelize (e.g. sc.parallelize(data, 10))                                                                      
 map{case (x, y): (x, func(y))}             
-map(lambda (x,y): (1, y))
+map(lambda (x,y): (1, y)).mapValues(lambda x: (x, 1)).reduceByKey(lambda x, y: (x[0] + y[0], x[1] + y[1]))
+.map(lambda key, xy: (key, xy[0]/xy[1])).collectAsMap()
                                                                                                                  
                                                                                                                  
