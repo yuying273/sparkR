@@ -50,4 +50,29 @@ sumCount = nums.combineByKey((lambda x: (x,1)),
                              (lambda x, y: (x[0] + y[0], x[1] + y[1])))
 r = sumCount.map(lambda key, xy: (key, xy[0]/xy[1])).collectAsMap()
 print(*r)    
-                                                                                                                 
+######### after simulate the data
+# load file: sequenceFile(path, keyClass, valueClass, minPartitions)
+data = sc.sequenceFile(inFile,
+  "org.apache.hadoop.io.Text", "org.apache.hadoop.io.IntWritable") ## or org.apache.hadoop.io.ArrayWritable
+data.first()
+
+## persisting or not?
+n practice, you will often use persist() to load a subset of your data into memory and query it repeatedly. For example, if we knew that we wanted to compute multiple results about the README lines that contain Python, we could write the script shown in Example 3-4.
+
+Example 3-4. Persisting an RDD in memory
+>>> pythonLines.persist
+
+>>> pythonLines.count()
+2
+
+>>> pythonLines.first()
+u'## Interactive Python Shell'
+To summarize, every Spark program and shell session will work as follows:
+
+Create some input RDDs from external data.
+
+Transform them to define new RDDs using transformations like filter().
+
+Ask Spark to persist() any intermediate RDDs that will need to be reused.
+
+Launch actions such as count() and first() to kick off a parallel computation, which is then optimized and executed by Spark.
