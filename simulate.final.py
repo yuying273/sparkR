@@ -55,6 +55,7 @@ print(*r)
 data = sc.sequenceFile(inFile,
   "org.apache.hadoop.io.Text", "org.apache.hadoop.io.IntWritable") ## or org.apache.hadoop.io.ArrayWritable
 data.first()
+data.count()
 
 ## persisting or not?
 n practice, you will often use persist() to load a subset of your data into memory and query it repeatedly. For example, if we knew that we wanted to compute multiple results about the README lines that contain Python, we could write the script shown in Example 3-4.
