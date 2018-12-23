@@ -49,13 +49,23 @@ sumCount = nums.combineByKey((lambda x: (x,1)),
                              (lambda x, y: (x[0] + y, x[1] + 1)),
                              (lambda x, y: (x[0] + y[0], x[1] + y[1])))
 r = sumCount.map(lambda key, xy: (key, xy[0]/xy[1])).collectAsMap()
-print(*r)    
+print(*r) 
+
+sumCount = nums.aggregate((0, 0),
+               (lambda acc, value: (acc[0] + value, acc[1] + 1)),
+               (lambda acc1, acc2: (acc1[0] + acc2[0], acc1[1] + acc2[1])))
+return sumCount[0] / float(sumCount[1])
+
+
 ######### after simulate the data
 # load file: sequenceFile(path, keyClass, valueClass, minPartitions)
 data = sc.sequenceFile(inFile,
   "org.apache.hadoop.io.Text", "org.apache.hadoop.io.IntWritable") ## or org.apache.hadoop.io.ArrayWritable
+## actions
 data.first()
 data.count()
+data.take(3)
+data.collect() ##use only the data size is small
 
 ## persisting or not?
 n practice, you will often use persist() to load a subset of your data into memory and query it repeatedly. For example, if we knew that we wanted to compute multiple results about the README lines that contain Python, we could write the script shown in Example 3-4.
@@ -77,3 +87,4 @@ Transform them to define new RDDs using transformations like filter().
 Ask Spark to persist() any intermediate RDDs that will need to be reused.
 
 Launch actions such as count() and first() to kick off a parallel computation, which is then optimized and executed by Spark.
+
