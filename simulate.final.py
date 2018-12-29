@@ -33,6 +33,7 @@ outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + s
 # a1 = data.map(generate)
 # a1.count()
 # a1.collect()
+data = sc.parallelize(range(0,r))
 data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
 ## 
 #One important parameter for parallel collections is
