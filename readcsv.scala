@@ -18,7 +18,7 @@ df.show
 // groupby the conditional variable, the last column, and count the number of entries of column "_c21"
 df.groupBy("_c21").count().show
 // I have error messages:
-df.write.partitionBy("_c21").saveAsTable("myparquet",format="parquet",mode="overwrite",path="/wsc/song273")
+df.write.format("parquet").partitionBy("_c21").write.mode("overwrite").path("/wsc/song273").saveAsTable("myparquet")
 df_writer.partitionBy('col1')\
          .saveAsTable('test_table', format='parquet', mode='overwrite',
                       path='/wsc/song273')
