@@ -18,4 +18,9 @@ df.show
 // groupby the conditional variable, the last column, and count the number of entries of column "_c21"
 df.groupBy("_c21").count().show
 // I have error messages:
-df.write.format("parquet").partitionBy("_c21").saveAsTable("/wsc/song273/myparquet")
+df.write.partitionBy("_c21").saveAsTable("myparquet",format='parquet', mode='overwrite',
+                      path='/wsc/song273')
+df_writer.partitionBy('col1')\
+         .saveAsTable('test_table', format='parquet', mode='overwrite',
+                      path='/wsc/song273')
+//spark.read.parquet(...)
