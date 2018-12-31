@@ -17,3 +17,5 @@ df.printSchema()
 df.show
 // groupby the conditional variable, the last column, and count the number of entries of column "_c21"
 df.groupBy("_c21").count().show
+// I have error messages:
+df.write.format("parquet").partitionBy("_c21").saveAsTable("/wsc/song273/myparquet")
