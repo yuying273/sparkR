@@ -6,7 +6,7 @@ val spark = org.apache.spark.sql.SparkSession.builder.
         getOrCreate;
 
 val df = spark.read.format("com.databricks.spark.csv").option("header", "false").option("inferSchema", "true").
-                  load("/wsc/song273/try2.csv")        
+                  load("/wsc/song273/spark/data/csv/n30p15m9.csv")        
 df.first()
 /////// layout of the data
 // number of rows
