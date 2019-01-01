@@ -5,7 +5,7 @@
 # experiment name
 #name <- "multi.factor"
 # top level directory for experiment on HDFS
-dir.exp = "/hadoop/mnt/wsc/song273/pf10n/sparklyr/dm/"
+dir.exp = "/hadoop/mnt/wsc/song273/spark/data/csv/"
 # directory for this experiment on HDFS
 #dir.exp = file.path(dir, name)
 # directory for local file system
@@ -21,14 +21,14 @@ sleep = 120
 ## subset factors 
 # log2 number of observations
 #n.c = 30
-n.c = 20
+n.c = 30
 # number of predictor variables
 #v.c = c(4,7)
 v.c = 4
 # log2 number of observations per subset
 #m.vec = seiq(8, 16, by=1)
 #r.c = 23:15
-r.c = 10
+r.c = 21
 ###############################
 ###############################
 ## generate csv file in hdfs
