@@ -39,7 +39,7 @@ system.time(for(n in n.c){
     m.vec = n-r.c
     for(m in m.vec){
       dir.dm = paste(dir.exp,'n',n,'p',p,"m",m,".csv", sep="")
-      r = n - m
+      r = 2^(n - m)
       m = 2^m
       for(i in 1:r) { 
         set.seed(r)
