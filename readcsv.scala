@@ -19,7 +19,7 @@ df.show
 df.groupBy("_c16").count().show
 // each level has 512 entries
 // I have error messages:
-df.write.format("parquet").option("path", "/wsc/song273").mode("overwrite").partitionBy("_c21").saveAsTable("myparquet")
+df.write.format("parquet").option("path", "/wsc/song273/spark/data").mode("overwrite").partitionBy("_c21").saveAsTable("myparquet")
 //df_writer.partitionBy('col1')\
 //         .saveAsTable('test_table', format='parquet', mode='overwrite',
 //                      path='/wsc/song273')
