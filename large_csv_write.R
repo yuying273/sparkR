@@ -1,6 +1,7 @@
 
 ############################
 ## setup
+library(iotools)
 ############################
 # experiment name
 #name <- "multi.factor"
@@ -12,7 +13,7 @@ dir.exp = "/hadoop/mnt/wsc/song273/spark/data/csv/"
 dir.local = "/home/song273/performance/wsc/dr/result/10node/sparklyr/"
 
 # break time in seconds between jobs
-sleep = 120
+#sleep = 120
 
 ############################
 ## factors
@@ -41,9 +42,11 @@ system.time(for(n in n.c){
       dir.dm = paste(dir.exp,'n',n,'p',p,"m",m,".csv", sep="")
       r = 2^(n - m)
       m = 2^m
+      set.seed(1)
+      value = as.data.frame(matrix(c(rnorm(m*p), sample(c(0,1), m, replace=TRUE),rep(i,m)), ncol=p+2))
       for(i in 1:r) { 
-        set.seed(r)
-        value = as.data.frame(matrix(c(rnorm(m*p), sample(c(0,1), m, replace=TRUE),rep(i,m)), ncol=p+2))
+        #set.seed(r)
+        #value = as.data.frame(matrix(c(rnorm(m*p), sample(c(0,1), m, replace=TRUE),rep(i,m)), ncol=p+2))
         ## not working on writing to hdfs
         write.csv.raw(value,file=dir.dm, append=TRUE,col.names=FALSE) 
         print(i)
