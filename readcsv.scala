@@ -15,8 +15,9 @@ df.count()
 df.columns.size
 df.printSchema()
 df.show
-// groupby the conditional variable, the last column, and count the number of entries of column "_c21"
-df.groupBy("_c21").count().show
+// groupby the conditional variable, the last column, and count the number of entries of column "_c16"
+df.groupBy("_c16").count().show
+// each level has 512 entries
 // I have error messages:
 df.write.format("parquet").option("path", "/wsc/song273").mode("overwrite").partitionBy("_c21").saveAsTable("myparquet")
 //df_writer.partitionBy('col1')\
