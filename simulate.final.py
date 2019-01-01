@@ -28,13 +28,32 @@ def generate(line,m,p):
     dataframe = tuple([tuple([float(ele) for ele in element]) for element in dataframe])
     return(dataframe)
 
+## simulate data
 value = generate(1,m,p)
 outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)
-# a1 = data.map(generate)
-# a1.count()
-# a1.collect()
 data = sc.parallelize(range(0,r))
 data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
+
+## simulate data, key is integer, value is array [1,2]
+outputfile2 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)+"try2"
+data = sc.parallelize(range(0,r))
+data.map(lambda x: (x,(1,2))).saveAsSequenceFile(outputfile2)
+
+## simulate data, key is integer, value is integer
+outputfile3 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)+"try3"
+data = sc.parallelize(range(0,r))
+data.map(lambda x: (x,1)).saveAsSequenceFile(outputfile3)
+
+######### after simulate the data
+# load file: sequenceFile(path, keyClass, valueClass, minPartitions)
+inFile = outputfile1
+data = sc.sequenceFile(inFile,
+  "org.apache.hadoop.io.IntWritable", "org.apache.hadoop.io.ArrayWritable") ## or org.apache.hadoop.io.ArrayWritable
+## actions
+data.first()
+data.count()
+data.take(3)
+data.collect() ##use only the data size is small
 ## 
 #One important parameter for parallel collections is
 #the number of partitions to cut the dataset into. 
