@@ -1,0 +1,13 @@
+https://proquestcombo-safaribooksonline-com.ezproxy.lib.purdue.edu/book/operating-systems-and-server-administration/apache/9781491912201/preface/idm140697507023776_html#X2ludGVybmFsX0h0bWxWaWV3P3htbGlkPTk3ODE0OTE5MTIyMDElMkZkZXNpZ25fY2hvaWNlc19odG1sJnF1ZXJ5PQ==
+
+Tuning parameters. 
+I. DataFrames versus SQL versus Datasets versus RDDs
+Across all languages, DataFrames, Datasets, and SQL are equivalent in speed. 
+This means that if you’re using DataFrames in any of these languages, performance is equal. 
+
+Lastly, if you want to use RDDs, we definitely recommend using Scala or Java. 
+If that’s not possible, we recommend that you restrict the “surface area” of RDDs in your application to the bare minimum. 
+That’s because when Python runs RDD code, it’s serializes a lot of data to and from the Python process. 
+This is very expensive to run over very big data and can also decrease stability.
+
+II. 
