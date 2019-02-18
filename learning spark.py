@@ -20,3 +20,15 @@ pythonLines.first()
 badLinesRDD.take(10)
 # save the contents of an RDD using the saveAsTextFile() action, saveAsSequenceFile()
 df.printSchema()
+
+# in Python
+from pyspark.sql import Row
+from pyspark.sql.types import StructField, StructType, StringType, LongType
+myManualSchema = StructType([
+  StructField("some", StringType(), True),
+  StructField("col", StringType(), True),
+  StructField("names", LongType(), False)
+])
+myRow = Row("Hello", None, 1)
+myDf = spark.createDataFrame([myRow], myManualSchema)
+myDf.show()
