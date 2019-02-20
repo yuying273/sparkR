@@ -32,3 +32,6 @@ myManualSchema = StructType([
 myRow = Row("Hello", None, 1)
 myDf = spark.createDataFrame([myRow], myManualSchema)
 myDf.show()
+
+https://stackoverflow.com/questions/50366604/pyspark-create-dataframe-from-random-uniform-disribution
+https://stackoverflow.com/questions/48181221/convert-the-map-rdd-into-dataframe  
