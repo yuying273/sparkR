@@ -35,3 +35,11 @@ myDf.show()
 
 https://stackoverflow.com/questions/50366604/pyspark-create-dataframe-from-random-uniform-disribution
 https://stackoverflow.com/questions/48181221/convert-the-map-rdd-into-dataframe  
+
+from pyspark.sql.functions import corr
+df.stat.corr("Quantity", "UnitPrice") 
+df.select(corr("Quantity", "UnitPrice")).show()
+
+## statistics
+df.describe().show()
+#Be sure to search the API documentation for more information and functions.
