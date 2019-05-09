@@ -9,7 +9,7 @@ import numpy as np
 import math
 import time
 
-n = 30
+n = 20
 v = 4
 p = 2**v-1
 m = 9
@@ -47,7 +47,6 @@ outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + s
 # a1 = data.map(generate)
 # a1.count()
 # a1.collect()
-data.map(lambda x: (x,value)).saveAsSequenceFile(outputfile1)
 ## 
 #One important parameter for parallel collections is
 #the number of partitions to cut the dataset into. 
@@ -60,7 +59,7 @@ start = time.time()
 data = sc.parallelize(range(0,r)) ## take 16 minutes to create data ## 
 # data.count()
 # data.collect() # only if the data can be fit into the memory
-outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(m)+"ver"+str(2)
+#outputfile = "/wsc/song273/spark/data/n" + str(n)+"v"+str(v) + "m" + str(m)+"ver"+str(2)
 #outputfile1 = "/wsc/song273/spark/data/sequence/n" + str(n)+"v"+str(v) + "m" + str(m)
 # a1 = data.map(generate)
 # a1.count()
