@@ -49,9 +49,6 @@ data.map(generate).saveAsTextFile(outputfile)
 ## Explanation about the stage: There are total 100 tasks to be completed. 
 ## 2 cores are being used to complete the 1000 tasks. 
 ## check spark.cores.max or executor.cores or dynamic in the spark configuration. 
-
-end_time = time.time()
-print(end_time - start)
 ##########################################################################################
 ## save to sequence file
 #saveAsSequenceFile(path, compressionCodecClass=None)
